@@ -1,5 +1,4 @@
 import requests
-import random
 import math
 print("Alfred's game")
 
@@ -10,7 +9,9 @@ def logic():
 
     nums = [num1, num2, num3]
 
-    psudorand = random.randrange(1, 3)
+    # Get a random integer from random.org between 1 and 3 (inclusive)
+    response = requests.get("https://www.random.org/integers/?num=1&min=1&max=3&col=1&base=10&format=plain&rnd=new")
+    psudorand = int(response.text.strip())
 
     avg = (num1 + num2 + num3)/3
 
@@ -18,11 +19,11 @@ def logic():
 
     low = min(nums)
 
-    if psudorand == "1":
-        print("Well done you win with"+ top*2)
-    elif psudorand == "2":
-        print("Good result all round "+ avg + " You get a draw")
+    if psudorand == 1:
+        print("Well done you win with " + str(top*2))
+    elif psudorand == 2:
+        print("Good result all round " + str(avg) + " You get a draw")
     else:
-        print("You are pathetic with "+str(math.floor(low/2)))
+        print("You are pathetic with " + str(math.floor(low/2)))
 
 logic()
